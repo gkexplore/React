@@ -52,7 +52,7 @@ class BooksApp extends React.Component {
            
             <Route exact path="/" render={()=>(
               bookShelves.map(shelf=>(
-                <ListBooks shelf={shelf} books={this.state.books}/>
+                <ListBooks key={shelf.titleValue} shelf={shelf} books={this.state.books} updateBook={this.updateBook}/>
               ))
             )}/>
             
@@ -64,14 +64,14 @@ class BooksApp extends React.Component {
             }/>
             
             <Route path='/search' render={({ history }) => (
-              <SearchBooks
+              <SearchBooks updateBook={this.updateBook}
                 onSearchBook={(book) => {
                   this.searchBook(book)
                   history.push('/')
                 }}
               />
            )} />
-           
+
         </div>
       </div>
     )

@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import Book from './Book'
+import { update } from './BooksAPI'
 
 class ListBooks extends Component{
     render(){
-        const {shelf, books} = this.props
+        const {shelf, books, updateBook} = this.props
         return(
             <div className="list-books-content">
               <div>
@@ -17,7 +18,7 @@ class ListBooks extends Component{
                             books.map((book) => 
                                 (<li key={book.id}>
                                 {(book.shelf === shelf.titleValue &&
-                                    <Book book={book} shelf={shelf}/>
+                                    <Book book={book} shelf={shelf} updateBook={updateBook}/>
                                 )}   
                                </li>)
                             )
