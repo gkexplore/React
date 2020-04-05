@@ -5,33 +5,8 @@ import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 
 class SearchBooks extends Component{
-    state = {
-        books:[], //this shoulf hold book details and shelf
-    }
-
-    searchBooks = (query) =>{
-        if(query!==null && query!==''){
-            BooksAPI.search(query)
-            .then((books)=>{
-                this.setState(() => ({
-                    books 
-                    }))
-                }
-            )
-        }else{
-            this.setState(() => (
-                {
-                    books: []
-                }
-            )
-
-            )
-        }  
-    }
-
-    render(){
-        const {books} = this.state
-        const {updateBook} = this.props
+   render(){
+        const {books, updateBook, searchBooks, searchQuery} = this.props
         return(
             <div className="search-books">
             <div className="search-books-bar">
@@ -43,13 +18,13 @@ class SearchBooks extends Component{
                 </button>
                 </Link>
               <div className="search-books-input-wrapper"> 
-                <input type="text" placeholder="Search by title or author" onChange={(event)=>this.searchBooks(event.target.value)}/>
+                <input type="text" placeholder="Search by title or author" onChange={(event)=>searchBooks(event.target.value)}/>
               </div>
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
               {
-               (books.length > 0 &&
+               ((searchQuery !=='' && books.length > 0) &&
                 books.map((book, index) => 
                     (<li key={index}>
                         {
