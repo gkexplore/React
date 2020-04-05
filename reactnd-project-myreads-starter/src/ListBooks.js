@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import Book from './Book'
-import { update } from './BooksAPI'
 
 class ListBooks extends Component{
+
+    static propTypes = {
+        shelf: PropTypes.object.isRequired,
+        books: PropTypes.array.isRequired,
+        updateBook: PropTypes.func.isRequired
+    }
+
     render(){
         const {shelf, books, updateBook} = this.props
         return(
@@ -18,7 +23,7 @@ class ListBooks extends Component{
                             books.map((book) => 
                                 (<li key={book.id}>
                                 {(book.shelf === shelf.titleValue &&
-                                    <Book book={book} shelf={shelf} updateBook={updateBook}/>
+                                    <Book book={book} updateBook={updateBook}/>
                                 )}   
                                </li>)
                             )

@@ -10,7 +10,7 @@ const bookShelves = [{titleName:'Currently Reading', titleValue: 'currentlyReadi
 let searchQuery = ''
 class BooksApp extends React.Component {
   state = {
-    books:[], //this shoulf hold book details and shelf
+    books:[], 
   }
   
   componentDidMount(){

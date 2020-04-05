@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 
 class Book extends Component{
+    static propTypes = {
+        book: PropTypes.object.isRequired,
+        updateBook: PropTypes.func.isRequired
+    }
     render(){
-        const {book, shelf, updateBook} = this.props
+        const {book, updateBook} = this.props
         return(
             <div className="book">
                 <div className="book-top">
