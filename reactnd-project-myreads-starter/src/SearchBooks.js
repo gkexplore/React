@@ -2,18 +2,46 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import Book from './Book'
+import * as BooksAPI from './BooksAPI'
 
 class SearchBooks extends Component{
     
     static propTypes = {
-        books: PropTypes.array.isRequired,
-        updateBook: PropTypes.func.isRequired,
-        searchBooks: PropTypes.func.isRequired,
-        searchQuery: PropTypes.string.isRequired
+        updateBook: PropTypes.func.isRequired
+    }
+
+    state = {
+        results: []
+    }
+
+    searchBooks = (query) =>{
+        if(query !== ''){
+            BooksAPI.search(query)
+            .then((results)=>{
+                if(results){
+                this.setState(() => ({
+                results 
+                }))}else{
+                this.setState(() => ({
+                    results: [] 
+                }))
+                }     
+            })
+        }else{
+            this.setState(() => ({
+                results: [] 
+            }))
+        }
+      }
+    
+    checkIfBookExists = (books, book) => {
+        const found = books.filter(b=>b.id === book.id)
+        return (found.map(o=>o.shelf)[0]);
     }
 
    render(){
-        const {books, updateBook, searchBooks, searchQuery} = this.props
+        const { books, updateBook} = this.props
+        const { results } = this.state
         return(
             <div className="search-books">
             <div className="search-books-bar">
@@ -25,17 +53,18 @@ class SearchBooks extends Component{
                 </button>
                 </Link>
               <div className="search-books-input-wrapper"> 
-                <input type="text" placeholder="Search by title or author" onChange={(event)=>searchBooks(event.target.value)}/>
+                <input type="text" placeholder="Search by title or author" onChange={(event)=>this.searchBooks(event.target.value)}/>
               </div>
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
               {
-               ((searchQuery !=='' && books.length > 0) &&
-                books.map((book, index) => 
+                  
+               ((results.length > 0) &&
+               results.map((book, index) => 
                     (<li key={index}>
                         {
-                            <Book book={book} updateBook={updateBook}/>
+                            <Book book={book} shelf={`${this.checkIfBookExists(books, book)}`} updateBook={updateBook}/>
                         }            
                     </li>))
                )}

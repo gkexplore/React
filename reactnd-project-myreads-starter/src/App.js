@@ -4,10 +4,10 @@ import './App.css'
 import ListBooks from './ListBooks'
 import SearchBooks from './SearchBooks'
 import { Route } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 
 const bookShelves = [{titleName:'Currently Reading', titleValue: 'currentlyReading'}, {titleName:'Want to Read', titleValue:'wantToRead'}, {titleName:'Read', titleValue:'read'}]
 let searchQuery = ''
+
 class BooksApp extends React.Component {
   state = {
     books:[], 
@@ -19,7 +19,14 @@ class BooksApp extends React.Component {
 
   updateBook = (book, shelf) =>{
     BooksAPI.update(book, shelf)
-    .then(this.getBooks())
+    .then(()=> {
+      book.shelf = shelf
+      searchQuery = ''
+      this.setState(state=>({
+        books: state.books.filter( b=> b.id !== book.id).concat([book])
+      }))
+    }
+    )
   }
 
   getBooks = () => {
@@ -29,50 +36,18 @@ class BooksApp extends React.Component {
         books
       }))
     })
-    searchQuery = ''
+    
   }
 
-  searchBooks = (query) =>{
-    searchQuery = query;
-    if(query!==null && query!==''){
-        BooksAPI.search(query)
-        .then((books)=>{
-            this.setState(() => ({
-                books 
-                }))
-            })
-    }else{
-        this.setState(() => (
-            {
-                books: []
-            }
-        ))
-    }  
-  }
 
   render() {
     return (
-      <div className="app">
-         <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-           
+      <div className="app">  
             <Route exact path="/" render={({ history })=>(
-              bookShelves.map(shelf=>(
-                <ListBooks key={shelf.titleValue} shelf={shelf} books={this.state.books} updateBook={(book, shelf) => {
+                <ListBooks bookShelves={bookShelves} books={this.state.books} updateBook={(book, shelf) => {
                   this.updateBook(book, shelf) 
                   history.push('/')}} />
-              ))
-            )}/>
-            
-            <Route exact path="/" render={()=>(
-              <div className="open-search">
-                <Link to='/search'><button >Add a book</button></Link>
-              </div>
-              )
-            }/>
-            
+            )}/>         
             <Route path='/search' render={({ history }) => (
               <SearchBooks books={this.state.books}
                 updateBook={(book, shelf) => {
@@ -81,8 +56,6 @@ class BooksApp extends React.Component {
                   searchBooks={this.searchBooks}
                   searchQuery={searchQuery}/>
            )} />
-
-        </div>
       </div>
     )
   }
