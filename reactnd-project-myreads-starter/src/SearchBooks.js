@@ -34,12 +34,7 @@ class SearchBooks extends Component{
         }
       }
     
-    checkIfBookExists = (books, book) => {
-        const bookFound = books.filter(b => b.id === book.id)
-        const shelf = bookFound.map(o=>o.shelf)[0]
-        const result = typeof shelf != "undefined" ? shelf:'none'
-        return result
-    }
+    
 
    render(){
         const { books, updateBook} = this.props
@@ -49,12 +44,10 @@ class SearchBooks extends Component{
             <div className="search-books">
             <div className="search-books-bar">
             <Link to='/'>
-            <button
-                className='close-search'
-                >
+                <button className='close-search'>
                     Close
                 </button>
-                </Link>
+            </Link>
               <div className="search-books-input-wrapper"> 
                 <input type="text" placeholder="Search by title or author" onChange={(event)=>this.searchBooks(event.target.value)}/>
               </div>
@@ -66,7 +59,7 @@ class SearchBooks extends Component{
                results.map((book, index) => 
                     (<li key={index}>
                         {
-                            <Book book={book} shelf={`${this.checkIfBookExists(books, book)}`} updateBook={updateBook}/>
+                            <Book book={book} books={books} updateBook={updateBook}/>
                         }            
                     </li>))
                )}

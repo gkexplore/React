@@ -29,7 +29,7 @@ class ListBooks extends Component{
                                 books.map((book) => 
                                     (<li key={book.id}>
                                     {(book.shelf === shelf.titleValue &&
-                                        <Book book={book} shelf={book.shelf} updateBook={updateBook}/>
+                                        <Book book={book} books={books} updateBook={updateBook}/>
                                     )}   
                                 </li>)
                                 )
