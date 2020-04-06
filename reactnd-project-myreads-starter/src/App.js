@@ -6,7 +6,6 @@ import SearchBooks from './SearchBooks'
 import { Route } from 'react-router-dom'
 
 const bookShelves = [{titleName:'Currently Reading', titleValue: 'currentlyReading'}, {titleName:'Want to Read', titleValue:'wantToRead'}, {titleName:'Read', titleValue:'read'}]
-let searchQuery = ''
 
 class BooksApp extends React.Component {
   state = {
@@ -21,7 +20,6 @@ class BooksApp extends React.Component {
     BooksAPI.update(book, shelf)
     .then(()=> {
       book.shelf = shelf
-      searchQuery = ''
       this.setState(state=>({
         books: state.books.filter( b=> b.id !== book.id).concat([book])
       }))
@@ -54,7 +52,7 @@ class BooksApp extends React.Component {
                   this.updateBook(book, shelf) 
                   history.push('/')}} 
                   searchBooks={this.searchBooks}
-                  searchQuery={searchQuery}/>
+                />
            )} />
       </div>
     )

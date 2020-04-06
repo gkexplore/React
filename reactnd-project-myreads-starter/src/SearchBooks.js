@@ -35,13 +35,16 @@ class SearchBooks extends Component{
       }
     
     checkIfBookExists = (books, book) => {
-        const found = books.filter(b=>b.id === book.id)
-        return (found.map(o=>o.shelf)[0]);
+        const bookFound = books.filter(b => b.id === book.id)
+        const shelf = bookFound.map(o=>o.shelf)[0]
+        const result = typeof shelf != "undefined" ? shelf:'none'
+        return result
     }
 
    render(){
         const { books, updateBook} = this.props
         const { results } = this.state
+       
         return(
             <div className="search-books">
             <div className="search-books-bar">
@@ -58,8 +61,7 @@ class SearchBooks extends Component{
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
-              {
-                  
+              {  
                ((results.length > 0) &&
                results.map((book, index) => 
                     (<li key={index}>
@@ -68,7 +70,6 @@ class SearchBooks extends Component{
                         }            
                     </li>))
                )}
-                
               </ol>
             </div>
           </div>
