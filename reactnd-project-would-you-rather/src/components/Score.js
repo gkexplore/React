@@ -1,40 +1,40 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-class Score extends Component{
-    render(){
-        const { 
+class Score extends Component {
+    render() {
+        const {
             answersCount,
             questionsCount,
             score,
             name,
             avatarURL } = this.props
 
-        return(
+        return (
             <div>
-            <span>{name} asks</span>
-            <img src={avatarURL}
-                alt={`Avatar of ${name}`}
-                className='avatar'
-            />
-            <div>
+                <span>{name} asks</span>
+                <img src={avatarURL}
+                    alt={`Avatar of ${name}`}
+                    className='avatar'
+                />
                 <div>
-                    <span>Answered Questions {answersCount}</span>
+                    <div>
+                        <span>Answered Questions {answersCount}</span>
+                    </div>
+                    <div>
+                        <span>Created Questions {questionsCount}</span>
+                    </div>
                 </div>
                 <div>
-                    <span>Created Questions {questionsCount}</span>
+                    <p>Score</p>
+                    <p>{score}</p>
                 </div>
             </div>
-            <div>
-                <p>Score</p>
-                <p>{score}</p>
-            </div>
-          </div>
         )
     }
 }
 
-function mapStateToProps({ authedUser }, { id, users }){
+function mapStateToProps({ authedUser }, { id, users }) {
     const answersCount = Object.keys(users[id].answers).length
     const questionsCount = users[id].questions.length
     const score = answersCount + questionsCount

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-class NotFound extends Component{
-    render(){
-        return(
-            
+class NotFound extends Component {
+    render() {
+        return (
+
             <div>
                 {
                     alert('Please signin and try again')

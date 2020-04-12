@@ -3,15 +3,15 @@ import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import ListPolls from './ListPolls'
 
-class Home extends Component{
-    
-    componentDidMount(){
+class Home extends Component {
+
+    componentDidMount() {
         this.props.dispatch(handleInitialData())
     }
 
-    render(){
-        return(
-            <ListPolls/>
+    render() {
+        return (
+            <ListPolls />
         )
     }
 }
