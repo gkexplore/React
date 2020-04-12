@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleQuestionAnswer } from '../actions/shared'
+import { Redirect } from 'react-router-dom'
 
 class Question extends Component{
 
@@ -25,6 +26,10 @@ class Question extends Component{
 
     render(){
         const{ question, user, optionOneAnswered, optionTwoAnswered, totalAnswers, authedUser, answered} = this.props
+        if(!question){
+           return <Redirect to='/notFound'/>
+        }
+        
         const{ name, avatarURL } = user
         const{ optionOne, optionTwo} = question
 
@@ -106,6 +111,9 @@ function mapStateToProps({ authedUser, users, questions }, props){
     const { id } = props.match.params
     console.log(id)
     const question = questions[id]
+    if(!question){
+       return question
+    }
     console.log(question)
     const optionOneAnswered = question.optionOne.votes.length
     const optionTwoAnswered = question.optionTwo.votes.length

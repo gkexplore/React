@@ -8,6 +8,7 @@ import Home from './Home'
 import NewQuestion from './NewQuestion'
 import LeaderBoard from './LeaderBoard'
 import Question from './Question'
+import NotFound from './NotFound'
 
 class App extends Component{
   render(){
@@ -26,6 +27,7 @@ class App extends Component{
                     <Route path='/new' component={NewQuestion}/>
                     <Route path='/questions/:id' component={Question} />
                     <Route path='/leaderboard' component={LeaderBoard}/>
+                    <Route path='/notFound' component={NotFound} />
                   </div>
               }
           </div>

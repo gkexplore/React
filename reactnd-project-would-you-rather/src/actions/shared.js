@@ -1,6 +1,6 @@
-import { getInitialData, saveQuestionAnswer } from '../utils/api'
-import { receiveUsers, addUserAnswer } from '../actions/users'
-import { receiveQuestions, updateQuestionAnswer } from '../actions/questions'
+import { getInitialData, saveQuestionAnswer, saveQuestion } from '../utils/api'
+import { receiveUsers, addUserAnswer, addUserQuestion } from '../actions/users'
+import { receiveQuestions, updateQuestionAnswer, addQuestion } from '../actions/questions'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 export function handleInitialData(){
@@ -27,6 +27,23 @@ export function handleQuestionAnswer(info){
         .catch((e)=>{
             console.warn('Error in handleQuestionAnswer: ', e)
             alert('There was an error saving your answer. Try again.')
+        })
+    }
+}
+
+export function handleAddQuestion(question){
+    return(dispatch) =>{
+        dispatch(showLoading())
+        return saveQuestion(question)
+        .then((question)=>{
+            console.log(question)
+            dispatch(addQuestion(question))
+            dispatch(addUserQuestion(question))
+        })
+        .then(()=>dispatch(hideLoading()))
+        .catch(()=>{
+            console.warn('There was an error occurred. Try again.')
+            alert('There was an error occurred. Try again.')
         })
     }
 }

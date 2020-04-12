@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import serializeFrom from 'form-serialize'
+import { handleAddQuestion } from '../actions/shared'
 
 class NewQuestion extends Component{
     handleSubmit = (e) =>{
-        e.placeholder()
+        e.preventDefault()
+        const question = serializeFrom(e.target, {hash: true})
+        console.log(question)
+        this.props.dispatch(handleAddQuestion(question))
+        this.props.history.push('/home')
     }
+
     render(){
         return(
             <div>
@@ -12,10 +19,12 @@ class NewQuestion extends Component{
                 <div>
                     <span>Complete the question:</span>
                     <b>Would you rather...</b>
-                    <form onSubmit={()=>this.handleSubmit}>
-                        <input type='text' name='optionOne' placeholder='Enter Option One Text Here'/>
+                    <form onSubmit={(e) => this.handleSubmit(e)}>
+                        
+                        <input type='text' name='optionOneText' placeholder='Enter Option One Text Here'/>
                         <b>OR</b>
-                        <input type='text' name='optionTwo' placeholder='Enter Option Two Text Here'/>
+                        <input type='text' name='optionTwoText' placeholder='Enter Option Two Text Here'/>
+                        <input type='hidden' name='author' value={this.props.authedUser}/>
                         <button type='submit'/>
                     </form>
                 </div>
@@ -25,4 +34,9 @@ class NewQuestion extends Component{
     }
 }
 
-export default connect()(NewQuestion)
+function mapStateToProps({authedUser}){
+    return {
+        authedUser
+    }
+}
+export default connect(mapStateToProps)(NewQuestion)
