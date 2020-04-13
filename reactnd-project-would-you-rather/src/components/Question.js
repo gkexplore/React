@@ -117,7 +117,7 @@ function mapStateToProps({ authedUser, users, questions }, props) {
     console.log(id)
     const question = questions[id]
     if (!question) {
-        return question
+        return {question}
     }
     console.log(question)
     const optionOneAnswered = question.optionOne.votes.length
