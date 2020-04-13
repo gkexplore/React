@@ -29,7 +29,7 @@ class NewQuestion extends Component {
                         <b>OR</b>
                         <input type='text' name='optionTwoText' placeholder='Enter Option Two Text Here' />
                         <input type='hidden' name='author' value={this.props.authedUser} />
-                        <button type='submit' />
+                        <button type='submit'>Submit</button>
                     </form>
                 </div>
             </div>
