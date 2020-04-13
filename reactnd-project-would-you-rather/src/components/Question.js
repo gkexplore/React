@@ -27,6 +27,10 @@ class Question extends Component {
     render() {
         const { question, user, optionOneAnswered, optionTwoAnswered,
             totalAnswers, authedUser, answered } = this.props
+        
+        if(!this.props.authedUser){
+            return <Redirect to='/'/>
+        }
 
         if (!question) {
             return <Redirect to='/notFound' />
@@ -37,7 +41,6 @@ class Question extends Component {
 
         return (
             <div>
-                <div>Question</div>
                 {answered &&
                     <div>
                         <span>Added By {name}</span>

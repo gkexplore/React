@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import serializeFrom from 'form-serialize'
 import { handleAddQuestion } from '../actions/shared'
+import { Redirect } from 'react-router-dom'
 
 class NewQuestion extends Component {
     handleSubmit = (e) => {
@@ -13,6 +14,9 @@ class NewQuestion extends Component {
     }
 
     render() {
+        if(!this.props.authedUser){
+            return <Redirect to='/'/>
+        }
         return (
             <div>
                 <div>Create New Question</div>

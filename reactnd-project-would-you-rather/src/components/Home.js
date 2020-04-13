@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import ListPolls from './ListPolls'
+import { Redirect } from 'react-router-dom'
 
 class Home extends Component {
 
@@ -10,11 +11,20 @@ class Home extends Component {
     }
 
     render() {
+        if(!this.props.authedUser){
+            return <Redirect to='/'/>
+        }
         return (
             <ListPolls />
         )
     }
 }
 
+function mapStateToProps({authedUser}){
+    return{
+        authedUser
+    }
+}
 
-export default connect()(Home)
+
+export default connect(mapStateToProps)(Home)
