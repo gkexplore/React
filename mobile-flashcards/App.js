@@ -36,7 +36,7 @@ export default function App() {
       <AppStatusBar backgroundColor={purple} barStyle='light-content' />
       <NavigationContainer>
           <Stack.Navigator>
-              <Stack.Screen name='Decks' component={HomeTabs}/>
+              <Stack.Screen name='Decks' component={HomeTabs} options={{headerShown: false}}/>
               <Stack.Screen name='DeckDetailsScreen' component={DeckDetailsScreen}/>
               <Stack.Screen name='AddCardScreen' component={AddCardScreen}/>
               <Stack.Screen name='StartQuizScreen' component={StartQuizScreen}/>
