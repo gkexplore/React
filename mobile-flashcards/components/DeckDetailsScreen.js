@@ -5,7 +5,7 @@ import { purple, white } from "../utils/colors"
 class DeckDetailsScreen extends Component{
     render(){
         return(
-            <View style={styles.container}>
+            <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
                 <Text onPress={() => {this.props.navigation.navigate('AddCardScreen')}}>Add Card</Text>
                 <Text onPress={() => {this.props.navigation.navigate('StartQuizScreen')}}>Start Quiz</Text>
             </View>
