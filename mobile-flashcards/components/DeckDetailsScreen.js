@@ -4,16 +4,12 @@ import { purple, white, red } from "../utils/colors"
 import { connect } from 'react-redux'
 
 class DeckDetailsScreen extends Component{
-    handleDeleteDeck = (deckId) =>{
-        console.log('handle Delete Here')
-    }
     render(){
         const { deckId, deck, decks } = this.props
         return(
             <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
                 <Button  title='Add Card' onPress={() => {this.props.navigation.navigate('AddCardScreen', {deckId: deckId })}}/>
                 <Button  title='Start Quiz' onPress={() => {this.props.navigation.navigate('StartQuizScreen', { deckId: deckId })}}/>
-                <Text style={{fontColor:'red'}} onPress={()=>this.handleDeleteDeck(deckId)}>Delete Deck</Text>
             </View>
         )
     }
