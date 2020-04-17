@@ -1,0 +1,3 @@
+export const RECEIVE_DECKS = 'RECEIVE_DECKS'
+export const ADD_DECK_TITLE = 'ADD_DECK_TITLE'
+export const ADD_NEW_CARD = 'ADD_NEW_CARD'

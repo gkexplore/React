@@ -1,24 +1,35 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
-import { purple, white } from "../utils/colors"
+import { Text, View, StyleSheet, Button } from 'react-native'
+import { purple, white, red } from "../utils/colors"
+import { connect } from 'react-redux'
 
 class DeckDetailsScreen extends Component{
+    handleDeleteDeck = (deckId) =>{
+        console.log('handle Delete Here')
+    }
     render(){
+        const { deckId, deck, decks } = this.props
         return(
             <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
-                <Text onPress={() => {this.props.navigation.navigate('AddCardScreen')}}>Add Card</Text>
-                <Text onPress={() => {this.props.navigation.navigate('StartQuizScreen')}}>Start Quiz</Text>
+                <Button  title='Add Card' onPress={() => {this.props.navigation.navigate('AddCardScreen', {deckId: deckId })}}/>
+                <Button  title='Start Quiz' onPress={() => {this.props.navigation.navigate('StartQuizScreen', { deckId: deckId })}}/>
+                <Text style={{fontColor:'red'}} onPress={()=>this.handleDeleteDeck(deckId)}>Delete Deck</Text>
             </View>
         )
     }
 }
 
-export default DeckDetailsScreen
+function mapStateToProps(decks, { route }){
+    const { deckId } = route.params
+    return {
+        decks,
+        deckId,
+        deck: decks[deckId]
+    }
+}
+
+export default connect(mapStateToProps)(DeckDetailsScreen)
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: white,
-      padding: 10
-    }
+   
   });
