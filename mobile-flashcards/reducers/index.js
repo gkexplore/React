@@ -11,7 +11,6 @@ function decks(state={}, action){
             console.log('titile reducer', action.newEntry)
             return {
                 ...state,
-                ...action.newEntry.title,
                 [action.newEntry.title]: action.newEntry
             }
         case ADD_NEW_CARD :

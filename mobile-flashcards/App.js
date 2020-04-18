@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { purple, white } from "./utils/colors"
+import { setLocalNotification} from './utils/helpers'
 
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
@@ -33,7 +34,11 @@ function AppStatusBar({ backgroundColor, ...props }) {
 
 const Stack = createStackNavigator()
 
-export default function App() {
+export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+  render(){
   return (
     <Provider store={createStore(reducer)}>
       <View style={{ flex: 1 }}>
@@ -56,7 +61,7 @@ export default function App() {
       </View>
     </Provider>
   );
-}
+}}
 
 
 const styles = StyleSheet.create({

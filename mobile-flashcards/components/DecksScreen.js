@@ -40,7 +40,7 @@ class DecksScreen extends Component{
                 {
                     Object.keys(decks).map((key)=>(
                         
-                    <TouchableOpacity style={styles.item}
+                    <TouchableOpacity key={key} style={styles.item}
                         onPress={() =>
                             this.props.navigation.navigate("DeckDetailsScreen", { deckId: key })
                         }

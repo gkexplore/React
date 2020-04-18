@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { Text, View, Button } from 'react-native'
 import { connect } from 'react-redux'
+import {
+    clearLocalNotification,
+    setLocalNotification
+  } from '../utils/helpers'
+
 
 class StartQuizScreen extends Component {
     constructor(props) {
@@ -30,9 +35,11 @@ class StartQuizScreen extends Component {
                 showResult: currentQuestion === (this.props.totalQuestions-1) ? true : false
             }))
         }
+        clearLocalNotification()
+      .then(setLocalNotification)
     }
 
-    _handleShowAnswer(){
+     _handleShowAnswer(){
         this.setState((currentState)=>({
             showAnswer: !currentState.showAnswer,
         }))
@@ -64,10 +71,8 @@ class StartQuizScreen extends Component {
                         </View>
                         )
                         :
-                        (showAnswer === true ?
-                            
+                        (showAnswer === true ?   
                             <View>
-                                <Text>{currentQuestion + 1}/{totalQuestions}</Text>
                                 <Text>{questions[currentQuestion].answer}</Text>
                                 <Text onPress={()=>this._handleShowAnswer()}>Question</Text>
                             </View>
