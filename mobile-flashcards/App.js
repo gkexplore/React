@@ -9,7 +9,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { purple, white } from "./utils/colors"
-import { setLocalNotification} from './utils/helpers'
+import { setLocalNotification } from './utils/helpers'
 
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
@@ -38,30 +38,31 @@ export default class App extends React.Component {
   componentDidMount() {
     setLocalNotification()
   }
-  render(){
-  return (
-    <Provider store={createStore(reducer)}>
-      <View style={{ flex: 1 }}>
-        <AppStatusBar backgroundColor={purple} barStyle='light-content' />
-        <NavigationContainer>
+  render() {
+    return (
+      <Provider store={createStore(reducer)}>
+        <View style={{ flex: 1 }}>
+          <AppStatusBar backgroundColor={purple} barStyle='light-content' />
+          <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name='Decks' component={HomeTabs} options={{headerShown: false}}/>
-                <Stack.Screen name='DeckDetailsScreen' component={DeckDetailsScreen} options={
-                  ({route}) => {
-                    const { deckId } = route.params
-                    return{
-                      title: `${ deckId }`
-                    }
+              <Stack.Screen name='Decks' component={HomeTabs} options={{ headerShown: false }} />
+              <Stack.Screen name='DeckDetailsScreen' component={DeckDetailsScreen} options={
+                ({ route }) => {
+                  const { deckId } = route.params
+                  return {
+                    title: `${deckId}`
                   }
-                }/>
-                <Stack.Screen name='AddCardScreen' component={AddCardScreen} options={{title:'Add Card'}}/>
-                <Stack.Screen name='StartQuizScreen' component={StartQuizScreen} options={{title: 'Start Quiz'}}/>
+                }
+              } />
+              <Stack.Screen name='AddCardScreen' component={AddCardScreen} options={{ title: 'Add Card' }} />
+              <Stack.Screen name='StartQuizScreen' component={StartQuizScreen} options={{ title: 'Start Quiz' }} />
             </Stack.Navigator>
-        </NavigationContainer>
-      </View>
-    </Provider>
-  );
-}}
+          </NavigationContainer>
+        </View>
+      </Provider>
+    );
+  }
+}
 
 
 const styles = StyleSheet.create({

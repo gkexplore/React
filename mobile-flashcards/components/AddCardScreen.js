@@ -4,17 +4,17 @@ import { connect } from 'react-redux'
 import { addNewCard } from '../actions'
 import { addCardToDeck } from '../utils/api'
 
-class AddCardScreen extends Component{
+class AddCardScreen extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            question:'',
-            answer:''
+            question: '',
+            answer: ''
         }
     }
 
-    _handleAddCard(){
+    _handleAddCard() {
         console.log('Question:', this.state.question)
         console.log('Answer:', this.state.answer)
         var newEntry = {}
@@ -26,23 +26,23 @@ class AddCardScreen extends Component{
         this.props.navigation.goBack()
     }
 
-    render(){
+    render() {
         const { deckId } = this.props
-        return(
-            <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <TextInput editable placeholder='Question'
                     style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                    onChangeText={(text)=>this.setState({question:text})}/>
+                    onChangeText={(text) => this.setState({ question: text })} />
                 <TextInput editable placeholder='Answer'
                     style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                    onChangeText={(text) => this.setState({answer:text})}/>
-                <Button title='Submit' onPress={()=>this._handleAddCard()}></Button>
+                    onChangeText={(text) => this.setState({ answer: text })} />
+                <Button title='Submit' onPress={() => this._handleAddCard()}></Button>
             </View>
         )
     }
 }
 
-function mapStateToProps(decks, { route }){
+function mapStateToProps(decks, { route }) {
     const { deckId } = route.params
     return {
         decks,
@@ -51,7 +51,7 @@ function mapStateToProps(decks, { route }){
     }
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
     return {
         dispatch,
     }

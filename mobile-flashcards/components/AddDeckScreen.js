@@ -7,15 +7,15 @@ import { addDeckTitle } from '../actions'
 import { saveDeckTitle } from '../utils/api'
 
 
-class AddDeckScreen extends Component{
-    constructor(props){
+class AddDeckScreen extends Component {
+    constructor(props) {
         super(props)
         this.state = {
-          deckname: ''
+            deckname: ''
         }
-      }
+    }
 
-      _handlePress() {
+    _handlePress() {
         console.log(this.state.deckname);
         var newEntry = {}
         newEntry.title = this.state.deckname;
@@ -25,25 +25,25 @@ class AddDeckScreen extends Component{
         const jumpToAction = TabActions.jumpTo('Decks');
         this.props.navigation.dispatch(jumpToAction);
 
-     }
+    }
 
-    render(){
-        return(
-            <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
+    render() {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text>What is the title of your new deck></Text>
                 <TextInput editable placeholder='Deck Title'
                     style={{ height: 40, width: 80, borderColor: 'gray', borderWidth: 1 }}
-                    returnKeyLabel = {"next"}
-                    onChangeText={(text) => this.setState({deckname:text})}/>
-                <Button title='Create Deck' 
-                 onPress={() => this._handlePress()}
+                    returnKeyLabel={"next"}
+                    onChangeText={(text) => this.setState({ deckname: text })} />
+                <Button title='Create Deck'
+                    onPress={() => this._handlePress()}
                 />
             </View>
         )
     }
 }
 
-function mapDispatchToProps(dispatch, { navigation }){
+function mapDispatchToProps(dispatch, { navigation }) {
     return {
         dispatch,
     }
